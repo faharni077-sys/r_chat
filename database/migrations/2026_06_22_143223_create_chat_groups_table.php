@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('chat_groups', function (Blueprint $table) {
             $table->id();
             $table->string('group_name');
+            $table->foreignId('admin_id')->constrained('users');
             $table->timestamps();
         });
     }

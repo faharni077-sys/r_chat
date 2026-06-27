@@ -14,27 +14,45 @@ class MessageController extends Controller
 
 
     $request->validate([
-       'message' => 'nullable',
-       'image' => 'nullable|image|max:2048',
-    ]);
+
+'receiver_id'=>'required',
+
+'message'=>'nullable',
+
+'image'=>'nullable|image|max:4096',
+
+'file' => 'nullable|file|max:10240',
+
+]);
 
     $image = null;
 
-if ($request->hasFile('image')) {
+    if ($request->hasFile('image')) {
 
     $image = $request->file('image')
         ->store('chat-images','public');
 
 }
 
+    $file = null;
+
+if ($request->hasFile('file')) {
+    $file = $request->file('file')->store('files', 'public');
+}
+
+    $file = $request->file('file')->store('files', 'public');
+
+    
     $message = Message::create([
         'sender_id' => auth()->id(),
         'receiver_id' => $request->receiver_id,
         'message' => $request->message,
         'image' => $image,
+        'file' => $file,
         'status' => 'sent',
     ]);
 
+    
     event(new MessageSent($message));
     
 

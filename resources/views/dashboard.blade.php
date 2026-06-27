@@ -127,6 +127,11 @@ bg-green-100
                 👤 Profil
             </a>
 
+            <a href="{{ route('groups.index') }}"
+   class="block px-4 py-2 hover:bg-gray-100">
+    👥 Grup Chat
+</a>
+
             <a href="#" class="block px-4 py-2 hover:bg-gray-100">
                 ⚙️ Pengaturan
             </a>
@@ -170,6 +175,16 @@ background-repeat:repeat;
     class="rounded-lg mb-2 max-w-[250px]">
 
 @endif
+
+@if($message->file)
+
+<a href="{{ asset('storage/'.$message->file) }}"
+   target="_blank"
+   class="text-blue-600 underline">
+    📄 Download File
+</a>
+
+@endif
                     
                      @if($message->is_deleted)
 
@@ -179,7 +194,10 @@ background-repeat:repeat;
 
 
 
-                    {{ $message->message }}
+                    @if($message->message)
+    {{ $message->message }}
+@endif
+
 @endif
 
                     <div class="text-xs mt-1 text-right">
@@ -228,6 +246,17 @@ background-repeat:repeat;
 
 @endif
 
+@if($message->file)
+
+<a href="{{ asset('storage/'.$message->file) }}"
+target="_blank"
+class="text-blue-600 underline">
+
+📄 {{ basename($message->file) }}
+</a>
+
+@endif
+
                     
 
                     @if($message->is_deleted)
@@ -238,7 +267,9 @@ background-repeat:repeat;
 
 @else
 
-{{ $message->message }}
+@if($message->message)
+    {{ $message->message }}
+@endif
 
 @endif
 
@@ -289,6 +320,20 @@ class="cursor-pointer text-3xl px-2">
 📷
 
 </label>
+
+<label
+for="file"
+class="cursor-pointer text-3xl px-2">
+
+📎
+
+</label>
+
+<input
+type="file"
+id="file"
+name="file"
+class="hidden">
 
 <input
 type="file"
