@@ -1,0 +1,1 @@
+{{-- Navigation dihilangkan agar tampilan seperti WhatsApp Web --}}
