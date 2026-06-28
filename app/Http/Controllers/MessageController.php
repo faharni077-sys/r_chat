@@ -40,7 +40,7 @@ if ($request->hasFile('file')) {
     $file = $request->file('file')->store('files', 'public');
 }
 
-    $file = $request->file('file')->store('files', 'public');
+    
 
     
     $message = Message::create([

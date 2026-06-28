@@ -1,8 +1,8 @@
 <x-app-layout>
-<div class="flex h-screen">
+<div class="flex h-screen flex-col md:flex-row">
 
     <!-- Sidebar -->
-    <div class="w-1/4 bg-white border-r flex flex-col">
+    <div class="w-full md:w-1/4 bg-white border-r flex flex-col">
         <div class="flex items-center justify-between p-4 bg-[#202c33] text-white">
 
     <div class="font-bold text-2xl">
@@ -35,12 +35,12 @@
 
 <a href="{{ route('chat.show', $user->id) }}">
 
-<div class="flex items-center p-4 border-b hover:bg-gray-100
+<div class="flex items-center p-3 md:p-4 border-b hover:bg-gray-100
 @if(isset($selectedUser) && $selectedUser->id == $user->id)
 bg-green-100
 @endif">
 
-    <div class="w-12 h-12 rounded-full bg-green-500 text-white flex items-center justify-center font-bold">
+    <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-green-500 text-white flex items-center justify-center font-bold">
         {{ strtoupper(substr($user->nickname,0,1)) }}
     </div>
 
@@ -48,7 +48,7 @@ bg-green-100
 
         <div>
 
-            <div class="font-semibold">
+            <div class="font-semibold text-sm md:text-base">
                 {{ $user->nickname }}
             </div>
 
@@ -76,7 +76,7 @@ bg-green-100
 
     @if(isset($selectedUser))
 
-<div class="bg-[#202c33] text-white p-3 flex items-center justify-between">
+<div class="bg-[#202c33] text-white p-3 flex items-center justify-between flex-wrap">
 
     <div class="flex items-center gap-3">
 
@@ -104,7 +104,7 @@ bg-green-100
 
     </div>
 
-<div class="flex items-center gap-5">
+<div class="flex items-center gap-3 md:gap-5">
 
     <button class="text-xl">
         📞
@@ -166,7 +166,7 @@ background-repeat:repeat;
         @if($message->sender_id == auth()->id())
 
             <div class="flex justify-end mb-3">
-                <div class="bg-green-500 text-white px-4 py-2 rounded-lg max-w-xs">
+                <div class="bg-green-500 text-white px-4 py-2 rounded-lg max-w-[85%] md:max-w-xs break-words">
 
                     @if($message->image)
 
@@ -236,7 +236,7 @@ background-repeat:repeat;
         @else
 
             <div class="flex justify-start mb-3">
-                <div class="bg-white border px-4 py-2 rounded-lg max-w-xs">
+                <div class="bg-white border px-4 py-2 rounded-lg max-w-[85%] md:max-w-xs break-words">
 
                     @if($message->image)
 
@@ -304,27 +304,28 @@ class="p-3 bg-[#f0f2f5] border-t">
         value="{{ $selectedUser->id }}"
     >
 
-    <div class="flex gap-2">
+    <div class="flex gap-2 items-center">
         <input
             type="text"
             name="message"
             placeholder="Ketik pesan..."
-            class="w-full p-3 rounded-full border focus:outline-none"
+            class="w-full p-2 md:p-3 rounded-full border focus:outline-none text-sm md:text-base"
             
         >
 
-        <label
+<label
 for="image"
-class="cursor-pointer text-3xl px-2">
-
+class="cursor-pointer text-2xl md:text-3xl px-1 md:px-2"
+>
 📷
-
 </label>
+
+
 
 <label
 for="file"
-class="cursor-pointer text-3xl px-2">
-
+class="cursor-pointer text-2xl md:text-3xl px-1 md:px-2"
+>
 📎
 
 </label>
@@ -343,7 +344,7 @@ class="hidden">
 
         <button
             type="submit"
-            class="bg-[#00a884] hover:bg-[#008f72] text-white px-6 rounded-full"
+            class="bg-[#00a884] hover:bg-[#008f72] text-white px-4 md:px-6 rounded-full"
         >
             Kirim
         </button>
